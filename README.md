@@ -1,6 +1,6 @@
 # Mouse Controller App
 
-Bu proje, **React Native** ve **Go** ile geliştirilmiş bir mobil uygulamadır. Uygulama, WebSocket kullanarak bir sunucuya bağlanır ve mobil cihazdaki sensör verilerini kullanarak fareyi uzaktan kontrol etmeye yarar. Sunucu tarafı **Go** ile yazılmış olup, **Makefile** ile kolayca çalıştırılabilir.
+Bu proje, **React Native** ve **Go** ile geliştirilmiş bir mobil uygulamadır. Uygulama, WebSocket kullanarak bir sunucuya bağlanır ve mobil cihazdaki sensör verilerini kullanarak fareyi uzaktan kontrol etmeye yarar. Sunucu tarafı **Go** ile yazılmış olup, **Makefile** ile kolayca çalıştırılabilir. (Proje geliştirilme aşamasındadır)
 
 ## İçindekiler
 
