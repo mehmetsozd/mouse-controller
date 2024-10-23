@@ -109,7 +109,7 @@ const WebSocketScreen = () => {
           placeholder="Server IP Address"
         />
 
-        <Text>Status: {connectionStatus}</Text>
+        <Text>Connection Status: {connectionStatus}</Text>
       </View>
 
       <TouchableOpacity
