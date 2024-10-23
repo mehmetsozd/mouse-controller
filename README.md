@@ -121,9 +121,9 @@ Bu mesaj, cihazın gyroscope verilerine dayanarak fare hareketini gerçekleştir
 Katkıda bulunmak isterseniz, lütfen aşağıdaki adımları takip edin:
 
 1. Bu projeyi fork'layın.
-2. Yeni bir dal oluşturun (git checkout -b yeni-özellik).
-3. Değişikliklerinizi commit edin (git commit -m 'Yeni özellik ekle').
-4. Dalınıza push yapın (git push origin yeni-özellik).
+2. Yeni bir dal oluşturun (git checkout -b new-feature).
+3. Değişikliklerinizi commit edin (git commit -m 'Add new feature').
+4. Dalınıza push yapın (git push origin new-feature).
 5. Bir Pull Request oluşturun.
 
 ## Lisans
