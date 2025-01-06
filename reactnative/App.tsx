@@ -1,8 +1,16 @@
-import React from 'react';
-import WebSocketScreen from './src/WebSocketScreen';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import TopNavigator from "./src/navigations/TopNavigator";
+import { WebSocketProvider } from "./src/context/WebSocketProvider";
 
 function App(): React.JSX.Element {
-  return <WebSocketScreen />;
+  return (
+    <WebSocketProvider>
+      <NavigationContainer>
+        <TopNavigator />
+      </NavigationContainer>
+    </WebSocketProvider>
+  );
 }
 
 export default App;

@@ -5,51 +5,14 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, { useRef, useState, useEffect } from "react";
-import WebSocket from "isomorphic-ws";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { gyroscope } from "react-native-sensors";
+import { WebSocketContext } from "../context/WebSocketProvider";
 
-const WebSocketScreen = () => {
-  const [ipAddress, setIpAddress] = useState("192.168.1.15");
-  const [connectionStatus, setConnectionStatus] = useState("no connection");
-  const channelRef = useRef(null);
-  const [sensitivity, setSensitivity] = useState(0.9);
+const MouseScreen = () => {
   const [isCursorMovingEnabled, setIsCursorMovingEnabled] = useState(false);
   const gyroscopeSubscriptionRef = useRef(null);
-
-  const connectToWS = () => {
-    setConnectionStatus("connecting...");
-    try {
-      const ws = new WebSocket(`ws://${ipAddress}:8080/ws`);
-      ws.onopen = () => {
-        setConnectionStatus("Connected");
-        channelRef.current = ws;
-      };
-      ws.onmessage = (event) => {
-        console.log(event.data);
-        channelRef.current.send("client received message");
-      };
-      ws.onerror = (error) => {
-        console.log("connection failed", error);
-        setConnectionStatus("connection failed", error);
-        channelRef.current = null;
-      };
-      ws.onclose = () => {
-        setConnectionStatus("connection closed");
-        channelRef.current = null;
-      };
-    } catch (error) {
-      console.log("connection failed", error);
-      setConnectionStatus("connection failed", error);
-    }
-  };
-
-  const sendMessage = (data) => {
-    console.log("Sending message", data);
-    if (channelRef.current) {
-      channelRef.current.send(JSON.stringify(data));
-    }
-  };
+  const { sendMessage } = useContext(WebSocketContext);
 
   const sendMouseMovement = (x, y, time) => {
     const seconds = (Date.now() - time) / 1000;
@@ -90,28 +53,15 @@ const WebSocketScreen = () => {
   };
 
   useEffect(() => {
-    connectToWS();
     return () => {
-      if (channelRef.current) {
-        channelRef.current.close();
+      if (gyroscopeSubscriptionRef.current) {
+        stopGyroscopeListening();
       }
-      stopGyroscopeListening();
     };
   }, []);
 
   return (
     <View style={styles.container}>
-      <View>
-        <TextInput
-          style={styles.input}
-          value={ipAddress}
-          onChangeText={setIpAddress}
-          placeholder="Server IP Address"
-        />
-
-        <Text>Connection Status: {connectionStatus}</Text>
-      </View>
-
       <TouchableOpacity
         style={[
           styles.circle,
@@ -142,7 +92,7 @@ const WebSocketScreen = () => {
   );
 };
 
-export default WebSocketScreen;
+export default MouseScreen;
 
 const styles = StyleSheet.create({
   container: {
